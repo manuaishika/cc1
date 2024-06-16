@@ -1,6 +1,6 @@
-# Recipe App
+# Recipe Web App
 
-A simple web application for storing and viewing recipes. This app is built using Node.js, Express, and MongoDB on the backend, and plain HTML, CSS, and JavaScript on the frontend.
+A simple web application for storing and viewing recipes. This app is built using Node.js and MongoDB on the backend, and plain HTML, CSS, and JavaScript on the frontend.
 
 ## Features
 
