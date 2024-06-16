@@ -1,3 +1,43 @@
+// server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 3000;
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/recipes', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Define a recipe schema and model
+const recipeSchema = new mongoose.Schema({
+  title: String,
+  ingredients: String,
+  instructions: String,
+  image: String
+});
+
+const Recipe = mongoose.model('Recipe', recipeSchema);
+
+// Middleware
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+// Routes
+app.get('/api/recipes', async (req, res) => {
+  const recipes = await Recipe.find();
+  res.json(recipes);
+});
+
+app.post('/api/recipes', async (req, res) => {
+  const newRecipe = new Recipe(req.body);
+  await newRecipe.save();
+  res.json(newRecipe);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 document.addEventListener('DOMContentLoaded', () => {
   const recipeForm = document.getElementById('new-recipe-form');
   const recipeList = document.getElementById('recipe-list');
